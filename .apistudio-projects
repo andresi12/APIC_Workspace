@@ -1,1 +1,8 @@
-projects: {}
+projects:
+  Hola-Mundo:
+    id: b3nZBbdS
+    description: Proyecto ejemplo para automatizar
+    tags:
+      - git
+      - Datapower-API-Gateway
+    lastUpdated: 1792526221535
