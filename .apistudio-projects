@@ -1,1 +1,9 @@
-projects: {}
+projects:
+  DPv6_Product_MultiAPI:
+    id: FWpmhO7w
+    description: Multi-API product with weather and storm APIs including quota limitations.
+    tags:
+      - DataPower API Gateway
+      - multi-api
+      - product
+    lastUpdated: 1792527208349
