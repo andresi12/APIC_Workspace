@@ -1,0 +1,13 @@
+kind: Plan
+apiVersion: api.ibm.com/v1
+metadata:
+  name: HolaMundoPlans
+  namespace: Hola-Mundo
+  version: '1.0'
+  tags: []
+  description: ''
+spec:
+  qos:
+    withQuota:
+      plan-limit:
+        - $ref: Hola-Mundo:Quota-xc69v4:1.0
