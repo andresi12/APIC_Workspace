@@ -1,0 +1,79 @@
+swagger: '2.0'
+info:
+  title: Test
+  x-ibm-name: test
+  version: 1.0.0
+x-ibm-configuration:
+  cors:
+    enabled: true
+  gateway: datapower-api-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - map:
+          inputs:
+            nombre:
+              schema:
+                type: string
+              variable: request.parameters.nombre
+          outputs:
+            output:
+              schema:
+                type: object
+                properties:
+                  saludo:
+                    type: string
+              variable: message.body
+          actions:
+            - set: output.saludo
+              default: Hola Mundo !
+          version: 2.1.0
+          title: map
+          options:
+            mapEmulateV4EmptyJSONObject: false
+            mapEmulateV4DefaultRequiredProps: false
+            mapEnablePostProcessingJSON: false
+            mapReferenceLimit: 1
+  properties:
+    target-url:
+      value: http://example.com/operation-name
+      description: The URL of the target service
+      encoded: false
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+basePath: /test
+paths:
+  /saludo:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      parameters:
+        - name: nombre
+          required: true
+          in: query
+          type: string
+securityDefinitions:
+  clientID:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+  Oauth2:
+    type: oauth2
+    flow: application
+    x-ibm-oauth-provider: oauth-microservicios
+    scopes:
+      openid: ''
+    tokenUrl: https://$(catalog.url)/security/micro/oauth2/token
+schemes:
+  - https
+security:
+  - Oauth2:
+      - openid

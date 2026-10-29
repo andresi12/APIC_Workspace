@@ -1,0 +1,12 @@
+kind: Properties
+apiVersion: api.ibm.com/v1
+metadata:
+  name: properties-test
+  namespace: HolaMundo
+  version: 1.0.0
+  tags: []
+spec:
+  target-url:
+    value: http://example.com/operation-name
+    description: The URL of the target service
+    encoded: false

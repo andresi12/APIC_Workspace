@@ -1,0 +1,12 @@
+kind: Product
+apiVersion: api.ibm.com/v1
+metadata:
+  name: TestProduct
+  namespace: HolaMundo
+  version: '1.0'
+  tags: []
+spec:
+  apis:
+    - $ref: HolaMundo:test:1.0.0
+  plans:
+    - $ref: HolaMundo:TestPlan:1.0

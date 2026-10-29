@@ -1,0 +1,159 @@
+swagger: '2.0'
+info:
+  title: api-jwt
+  x-ibm-name: api-jwt
+  version: 1.0.0
+x-ibm-configuration:
+  cors:
+    enabled: true
+  gateway: datapower-api-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - operation-switch:
+          version: 2.0.0
+          title: operation-switch
+          case:
+            - operations:
+                - verb: get
+                  path: /gen
+              execute:
+                - set-variable:
+                    version: 2.0.0
+                    title: set-variable
+                    actions:
+                      - set: rs256-key
+                        value: >-
+                          {     "p":
+                          "6D50lnjRKhkuGKFEqK4Xtvto3HzhCBT_GWdKd6P6W_GCceiXwqnWgxBvB6DnE57XfEePxKmSO82mr_GUuSeo_gAv8g6TidZf6sesgx6WEUoWLg6rPUr1y24zB66uuEihitWin_86GSeY-rDpoaUH3cBDQ6Kj9c3DkF2_tX1SuuU",    
+                          "kty": "RSA",     "q":
+                          "_JCeB3iCN1bNvzelwarDNvmitCJwZ7uXwDoyjqKNygxFfwedGfM7HXJD9OZA44V-vM76DEpjLxIQwMIWPcI3vrB7--GukCnq_qxHTI_VzRG_N4HBWxhiNKm1tJKhoFC00p_WCW3igC7Ls-IADyYfNihNl0iOx2Xb8mBAaK1xvbM",    
+                          "d":
+                          "TiwdYOJCkLY_kXCRndPiObDrVU15AESHuyQG--QOyH2aqMOT1wYGjMEftVTduWsYokA2H4B6v4J3YEwnuE9PLHtTEy_oYZnXVDtrzCq3GvVqhUnHaP9p9ohbcAytzEnHd-wDdw7b3Bu3hkH5vYeVyMcTE5-KmIjyfmqFCvlklfy2qTRaNW5viM9qos7P-Dh35iAlzfBJBkoOh6W5xN4YDEifXJTj5BMggzLdDsETnH2S_0B2k6TI6YEZsPduXPl8U7O8pc3KKBq_FvJC9iELu3FKLG1409ARLskrXgw4HJqQdKBkeJm6aZeLQL9NPKe7_4ZS1JBppSC-nENql-FTfQ",    
+                          "e": "AQAB",     "use": "sig",     "kid":
+                          "rs256-key-1",     "qi":
+                          "KW9cYwIGNErfrjxr6Zwt5OrOPmPSAG2JSZf8TPELfsQ3E4nZnG1Cbicwsm9i7SLh2fipTGv_EnEazshglqWIsMC4oehgq6P7bNtP8gx1H2Z_Ngsi2aLKDbnrICpULpOp5ofRKCBQUKNZGaY3Aq2cJPXrr7hAIgC26SxXzq1z3yQ",    
+                          "dp":
+                          "w4YpU7F9ryqp01SaYETJdGUvQEnmjo5WwoVifV1RXuzx_IJsmhewoIFKaKq_QJZ_JoN8934nvi-CQShrJILOVKHFu80ny2jvMdNPWsh6YS31hGsXIbAlRVKOpc4cDMwhLKh1lKwktp7OvWgKGeu9tqSyPJQF4-CK39T9nIdZCj0",    
+                          "alg": "RS256",     "dq":
+                          "9PsN3i89F5KCNdUzWdxaSKvx7wpsv6HNu2539bSlFfO7QVFQSIiOsaxRUG47SLYHTfrxvhQ1isXaLC7WxgbqbXPgf1zUJxAR2f-flRr7hlONh7i7pbHMKErpboLAdbFzA854HWNRzYYWnqA78HXI1o5XXMPLgoxBwSMttptudVM",    
+                          "n":
+                          "5SCtQwaPUljE-D6jvZan5hGtjmvGhYzmhBCIv8mINmlP5yhk67dQrL4tfkCBfpkoUpTypxAvuG7cq6o-wj-p2nDN-m96A9aKmCKTv4YItYuuTlnN_K19iPFT0a114CecmBA0hMT72Wk-RD5OkhiwL4BcofIRmTEWzi270FSJUMStHOqeMSyZ_nJNbCcZiGRRAYUKeOJJbR5xGHdm5xhIRle9biycvNc-D94FfnwdsrjaRNa4Eba3V1a1I_9_jcivg6ALGyKQaIaTiLmzDRnoSnQuqtnNJNLkHYvThzxM3IeI3vgKtHLdGRILhzNsear4K3qkU8u6BOuVGHBF9Oi_Hw"
+                          }
+                        type: string
+                      - set: iss-claim
+                        value: bank.com
+                        type: string
+                      - set: aud-claim
+                        value: portal
+                        type: string
+                      - set: subject-claim
+                        value: mirut123456
+                        type: string
+                    description: set
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "var json_privateclaim = {\r\n\t'bank': {\r\n\t\t'code':'200',\r\n\t\t'description':'ok',\r\n\t\t'server_code':'0',\r\n\t\t'server_description':'Success',\r\n\t\t'data':{\r\n\t\t\t'client_id':'123456789',\r\n\t\t\t'client_type':'1'\r\n\t\t}\r\n\t}\t\r\n};\r\ncontext.set('private.claim', json_privateclaim);"
+                - jwt-generate:
+                    version: 2.0.0
+                    title: jwt-generate
+                    jwt: generated.jwt
+                    iss-claim: iss-claim
+                    exp-claim: 60
+                    aud-claim: aud-claim
+                    jws-jwk: rs256-key
+                    jws-alg: RS256
+                    sub-claim: subject-claim
+                    private-claims: private.claim
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "\r\nvar json_output = {\r\n\t'jwt': context.get('generated.jwt')\r\n};\r\n\r\ncontext.message.body.write(json_output);\r\ncontext.message.header.set('Content-Type', \"application/json\");"
+            - operations:
+                - verb: get
+                  path: /val
+              execute:
+                - set-variable:
+                    version: 2.0.0
+                    title: set-variable
+                    actions:
+                      - set: rs256-key
+                        value: >-
+                          {     "kty": "RSA",     "e": "AQAB",     "use":
+                          "sig",     "kid": "rs256-key-1",     "alg":
+                          "RS256",     "n":
+                          "5SCtQwaPUljE-D6jvZan5hGtjmvGhYzmhBCIv8mINmlP5yhk67dQrL4tfkCBfpkoUpTypxAvuG7cq6o-wj-p2nDN-m96A9aKmCKTv4YItYuuTlnN_K19iPFT0a114CecmBA0hMT72Wk-RD5OkhiwL4BcofIRmTEWzi270FSJUMStHOqeMSyZ_nJNbCcZiGRRAYUKeOJJbR5xGHdm5xhIRle9biycvNc-D94FfnwdsrjaRNa4Eba3V1a1I_9_jcivg6ALGyKQaIaTiLmzDRnoSnQuqtnNJNLkHYvThzxM3IeI3vgKtHLdGRILhzNsear4K3qkU8u6BOuVGHBF9Oi_Hw"
+                          }
+                        type: string
+                    description: set
+                - jwt-validate:
+                    version: 2.0.0
+                    title: jwt-validate
+                    jwt: request.headers.authorization
+                    output-claims: decoded.claims
+                    jws-jwk: rs256-key
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "\r\nvar json_output = context.get('decoded.claims');\r\n\r\n\r\ncontext.message.body.write(json_output);\r\ncontext.message.header.set('Content-Type', \"application/json\");\r\n"
+            - operations:
+                - verb: get
+                  path: /.well-known/jwks.json
+              execute:
+                - gatewayscript:
+                    version: 2.0.0
+                    title: gatewayscript
+                    source: "context.message.body.write(\"{\\\"keys\\\":[{\\\"kty\\\": \\\"RSA\\\",\\\"e\\\": \\\"AQAB\\\",\\\"use\\\": \\\"sig\\\",\\\"kid\\\": \\\"rs256-key-1\\\",\\\"alg\\\": \\\"RS256\\\",\\\"n\\\": \\\"5SCtQwaPUljE-D6jvZan5hGtjmvGhYzmhBCIv8mINmlP5yhk67dQrL4tfkCBfpkoUpTypxAvuG7cq6o-wj-p2nDN-m96A9aKmCKTv4YItYuuTlnN_K19iPFT0a114CecmBA0hMT72Wk-RD5OkhiwL4BcofIRmTEWzi270FSJUMStHOqeMSyZ_nJNbCcZiGRRAYUKeOJJbR5xGHdm5xhIRle9biycvNc-D94FfnwdsrjaRNa4Eba3V1a1I_9_jcivg6ALGyKQaIaTiLmzDRnoSnQuqtnNJNLkHYvThzxM3IeI3vgKtHLdGRILhzNsear4K3qkU8u6BOuVGHBF9Oi_Hw\\\"}]}\");\r\ncontext.message.header.set('Content-Type', \"application/json\");\r\n\r\n\r\n"
+          otherwise: []
+    catch:
+      - default:
+          - gatewayscript:
+              version: 2.0.0
+              title: gatewayscript
+              source: "\r\nvar json_output = {\r\n\t'code': '404',\r\n\t'message': 'Token\_no\_existe\_en\_cache',\r\n\t'msg': context.get('jwt-validate.error-message')\r\n};\r\n\r\ncontext.message.header.set('Content-Type', \"application/json\");\r\ncontext.message.body.write(json_output);"
+  properties:
+    target-url:
+      value: http://example.com/operation-name
+      description: The URL of the target service
+      encoded: false
+  activity-log:
+    enabled: true
+    success-content: activity
+    error-content: payload
+basePath: /api-jwt
+paths:
+  /gen:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+    parameters: []
+  /val:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+    parameters:
+      - name: Authorization
+        required: true
+        in: header
+        type: string
+        description: Enter Bearer <jwt>
+  /.well-known/jwks.json:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+securityDefinitions: {}
+schemes:
+  - https

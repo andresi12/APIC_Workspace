@@ -1,0 +1,21 @@
+openapi: 3.0.4
+info:
+  title: HolaMundo
+  version: '1.0'
+  description: ''
+paths:
+  /saludo:
+    summary: ''
+    description: ''
+    get:
+      responses:
+        '200':
+          description: ''
+    parameters:
+      - name: nombre
+        in: query
+        schema:
+          type: string
+          example: S101
+components:
+  securitySchemes: {}

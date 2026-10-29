@@ -1,0 +1,54 @@
+kind: DataPowerAssembly
+apiVersion: api.ibm.com/v1
+metadata:
+  name: assembly-test
+  namespace: HolaMundo
+  version: 1.0.0
+  tags: []
+spec:
+  x-ibm-configuration:
+    cors:
+      enabled: true
+    gateway: datapower-api-gateway
+    type: rest
+    phase: realized
+    enforced: true
+    testable: true
+    assembly:
+      execute:
+        - map:
+            inputs:
+              nombre:
+                schema:
+                  type: string
+                variable: request.parameters.nombre
+            outputs:
+              output:
+                schema:
+                  type: object
+                  properties:
+                    saludo:
+                      type: string
+                variable: message.body
+            actions:
+              - set: output.saludo
+                from: nombre
+                value: '"Hola" & $(1) & " !"'
+                default: ''
+            version: 2.1.0
+            title: map
+            options:
+              mapEmulateV4EmptyJSONObject: false
+              mapEmulateV4DefaultRequiredProps: false
+              mapEnablePostProcessingJSON: false
+              mapReferenceLimit: 1
+    properties:
+      target-url:
+        value: http://example.com/operation-name
+        description: The URL of the target service
+        encoded: false
+    activity-log:
+      enabled: true
+      success-content: activity
+      error-content: payload
+    buffering: true
