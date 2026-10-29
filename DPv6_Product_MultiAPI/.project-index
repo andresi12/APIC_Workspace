@@ -29,13 +29,13 @@
       "filePath": "DPv6_Product_MultiAPI/Basic_Assertion.yml",
       "docIndex": 0,
       "assetType": "resource",
-      "lastIndexed": 1792527210940,
+      "lastIndexed": 1793305686515,
       "schemaVersion": 1,
       "kind": "assertion",
       "name": "Basic_Assertion",
       "namespace": "DPv6_Product_MultiAPI",
       "version": "1.0",
-      "contentHash": "920802a8e32d1b9e"
+      "contentHash": "849fde77f664952e"
     },
     {
       "id": "3d3f630e-b58d-41fb-997f-6f612f1a8569:0",
@@ -99,13 +99,13 @@
       "filePath": "DPv6_Product_MultiAPI/Sanity.yml",
       "docIndex": 0,
       "assetType": "resource",
-      "lastIndexed": 1792527217268,
+      "lastIndexed": 1793305778881,
       "schemaVersion": 1,
       "kind": "test",
       "name": "Sanity",
       "namespace": "DPv6_Product_MultiAPI",
       "version": "1.0",
-      "contentHash": "7012acbf5479a7c8"
+      "contentHash": "8ed72ed48dd07bcc"
     },
     {
       "id": "9bf2ef4e-29d3-4dd4-b523-99eb9971e764:0",
@@ -296,7 +296,7 @@
       "targetRefKind": "resource",
       "isValid": true,
       "createdAt": 1792527217271,
-      "lastValidated": 1792527217271
+      "lastValidated": 1793305686538
     },
     {
       "id": "9728dcea-1db9-45c1-9d36-3d0c3cd64b88",

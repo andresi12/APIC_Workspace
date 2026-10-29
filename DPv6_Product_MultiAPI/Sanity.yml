@@ -19,7 +19,7 @@ spec:
         noauth: true
       parameters:
         - key: petId
-          value: 1
+          value: '"1"'
       assertions:
         - $ref: DPv6_Product_MultiAPI:Basic_Assertion:1.0
   environment:

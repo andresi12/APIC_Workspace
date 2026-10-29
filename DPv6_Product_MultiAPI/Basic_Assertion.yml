@@ -6,6 +6,7 @@ metadata:
   version: '1.0'
   tags:
     - assertion
+  description: ''
 spec:
   - name: Status code validation
     key: responseStatus
