@@ -7,3 +7,9 @@ projects:
       - multi-api
       - product
     lastUpdated: 1793307027561
+  HolaMundo:
+    id: jYKwJfDV
+    description: Proyecto ejemplo con un API segurizada con Oauth
+    tags:
+      - DataPower API Gateway
+    lastUpdated: 1793307051586
