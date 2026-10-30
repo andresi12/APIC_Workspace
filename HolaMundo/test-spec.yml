@@ -3,7 +3,8 @@ info:
   title: Test
   x-ibm-name: test
   version: 1.0.0
-  description: dsadsdf
+  description: ''
+  termsOfService: asddsad
 x-ibm-configuration:
   cors:
     enabled: true
